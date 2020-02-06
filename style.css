@@ -1,10 +1,17 @@
 #copyPaste{
-  background-color:#838383;
-  width: 100%;
-
+  background-color:hsl(360, 91%, 36%);
+  width: 10%;
+  color: whitesmoke;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 24px;
+  border-radius: 8px;
+  float: right;
 }
 
-
+h2{
+  text-align: center;
+}
 
 
 *,

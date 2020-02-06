@@ -1,35 +1,25 @@
-// Assignment Code
-// var generateBtn = document.querySelector("#generate");
+// Setting user variable
 
-// Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-
-//   passwordText.value = password;
-
-// }
-
-
-// let includeUppercase = false;
-// let includeLowercase = false;
-// let includeSpecial = false;
-// let includeNubmbers = false;
 let charCount;
 
-var upperCaseArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-var lowerCaseArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-var numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-var specialArray = ["!", "'", "@", "$", "&", "%", "+", ",", "-", "/", ";", ":", "<", ">", "=", "^", "*"]
-var choices = [""];
-var password = "";
+//Setting my generatePassword function to starts when button with id="generate" is clicked
 
+document.getElementById("generate").onclick = generatePassword;
 
-function userQ() {
+// Function called "Generate Password"
+
+function generatePassword() {
+
+  var choices = [];
+  var password = "";
+
+  //prompt for user to select length of password they desire, while limiting selection to between 8 and 128
 
   charCount = prompt("How many characters do you want? 8-128")
   if (charCount < 8 || charCount > 128) {
     alert("invalid length, please retry")
+
+    //If user enters a number in the acceptable range they are asked to confirm which character types the want to include in their password
 
   } else {
     includeUppercase = confirm("Do you want upper case letters?");
@@ -38,21 +28,18 @@ function userQ() {
     includeLowercase = confirm("Do you want lower case letters")
 
 
-    includeSpecial = confirm("do you want special charcaters?")
+    includeSpecial = confirm("do you want special characters?")
 
-    includeNubmbers = confirm("Do wou want numbers charcaters")
-
-    console.log("includeUppercase is " + includeUppercase)
-    console.log("includeLowercase is " + includeLowercase)
-    console.log("includeSpecial is " + includeSpecial)
-    console.log("includeNubmbers is " + includeNubmbers)
-    console.log(charCount)
-
+    includeNumbers = confirm("Do wou want numbers characters")
   }
 
-  if (includeUppercase == false && includeLowercase == false && includeNubmbers == false && includeSpecial == false) {
+  //if statement to alert the user if they have not selected any variables
+
+  if (includeUppercase == false && includeLowercase == false && includeNumbers == false && includeSpecial == false) {
     alert("You must select some variables")
   }
+  //Else statement will push all selected categories to the choices array
+
   else {
     if (includeUppercase) {
       choices.push("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
@@ -62,7 +49,7 @@ function userQ() {
       choices.push("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
 
     }
-    if (includeNubmbers) {
+    if (includeNumbers) {
       choices.push(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
 
     }
@@ -70,46 +57,29 @@ function userQ() {
       choices.push("!", "'", "@", "$", "&", "%", "+", ",", "-", "/", ";", ":", "<", ">", "=", "^", "*")
 
     }
+
     console.log(choices)
-    console.log(charCount)
+
+    //If statement that says if charCount is true (has a value), run a for loop through the choices array, pull out 1 random character each time and store it in the password variable, for as long as the i < charCount value   
 
     if (charCount) {
       for (var i = 0; i < charCount; i++) {
-        password += choices[Math.floor(Math.random() * Math.floor(choices.length))]
+        password += choices[Math.floor(Math.random() * choices.length)]
       }
     }
-    console.log(password)
   }
+  //Inserting the password into the text box with id = "password" 
+
   document.getElementById("password").value = password
-  console.log(password)
 }
 
-document.getElementById("generate").onclick = userQ;
+//Copy button function
 
-// how to reset the variables when click generate 
-
-
-
-
-// if (charCount) {
-//   for (var i = 0; i <= charCount; i++) {
-//     password = password + choices.charAt(Math.floor(Math.random() * Math.floor(choices.length -1)))
-//   }
-//  console.log(test)
-//     console.log(charCount)
-//     console.log(password)
-// }
-// test = lowerCaseArray[Math.floor(Math.random() * lowerCaseArray.length)]
-// let randLowerCase =lowerCaseArray[ Math.floor(Math.random()*lowerCaseArray.length)]
-// console.log (randLowerCase)
-// let randNumb =numberArray[ Math.floor(Math.random()*numberArray.length)]
-// let randSpecial =specialArray[ Math.floor(Math.random()*specialArray.length)]
-
-function copyPassword(){
+function copyPassword() {
 
   document.getElementById("password").select();
 
   document.execCommand('Copy')
 
-  alert("password has been coppied")
+  alert("password has been copied")
 }
